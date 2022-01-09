@@ -8,7 +8,7 @@ import link_bridge
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    flutterLinkChannels.append(FlutterLinkTest.self)
+    FlutterLinkCannnelManger.addChannel(channel: FlutterLinkTest.self)
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

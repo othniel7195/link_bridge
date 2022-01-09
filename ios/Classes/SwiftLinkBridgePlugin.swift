@@ -8,7 +8,7 @@ public class SwiftLinkBridgePlugin: NSObject, FlutterPlugin {
         let instance = SwiftLinkBridgePlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
         ///注册所有channel
-        let bridgeChannels = flutterLinkChannels.map({$0.init()})
+        let bridgeChannels = FlutterLinkCannnelManger.getAllChannel().map({$0.init()})
         bridgeChannels.forEach { $0.setup(with: registrar.messenger())}
     }
     

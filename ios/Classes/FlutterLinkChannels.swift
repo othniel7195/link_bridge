@@ -7,4 +7,15 @@
 
 import Foundation
 
-public var flutterLinkChannels = [FlutterChannelLink.Type]()
+private var flutterLinkChannels = [FlutterChannelLink.Type]()
+
+public class FlutterLinkCannnelManger {
+    
+    public static func  addChannel(channel: FlutterChannelLink.Type) {
+        flutterLinkChannels.append(channel)
+    }
+    
+    public static func getAllChannel() -> [FlutterChannelLink.Type] {
+        return flutterLinkChannels
+    }
+}
