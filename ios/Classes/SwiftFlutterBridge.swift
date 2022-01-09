@@ -119,7 +119,7 @@ public final class SwiftFlutterBridgeHandler {
     }
 }
 
-typealias FlutterChannelHandler = (String, Any?, @escaping FlutterResult) -> Void;
+typealias FlutterChannelHandler = (String, Any?, @escaping FlutterResult) -> Void
 
 class FlutterBridge {
     static var handler: FlutterChannelHandler? = nil

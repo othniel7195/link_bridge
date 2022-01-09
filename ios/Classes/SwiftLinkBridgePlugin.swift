@@ -8,11 +8,16 @@ public class SwiftLinkBridgePlugin: NSObject, FlutterPlugin {
         let instance = SwiftLinkBridgePlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
         ///注册所有channel
-        let bridgeChannels = FlutterLinkCannnelManger.getAllChannel().map({$0.init()})
+        let bridgeChannels = FlutterLinkChannelManger.getAllChannel().map({$0.init()})
         bridgeChannels.forEach { $0.setup(with: registrar.messenger())}
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        result("iOS " + UIDevice.current.systemVersion)
+        if call.method == "linkBridgeTest" {
+            result("iOS " + UIDevice.current.systemVersion)
+        } else {
+            result(FlutterMethodNotImplemented)
+        }
+        
     }
 }

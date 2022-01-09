@@ -22,7 +22,7 @@ public protocol FlutterChannelLink: AnyObject {
     func registerMethodHandlers()
     func setup(with binaryMessenger: FlutterBinaryMessenger)
     func clearData()
-    func moduleWillUnregister()
+    func channelWillUnregister()
 }
 
 
@@ -61,6 +61,6 @@ public extension FlutterChannelLink {
         }
     }
     
-    func moduleWillUnregister() {}
+    func channelWillUnregister() {}
     func clearData() {}
 }
