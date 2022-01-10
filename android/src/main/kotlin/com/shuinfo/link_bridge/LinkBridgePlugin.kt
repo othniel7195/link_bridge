@@ -1,4 +1,4 @@
-package com.jimmy.link_bridge
+package com.shuinfo.link_bridge
 
 import androidx.annotation.NonNull
 
@@ -19,7 +19,7 @@ class LinkBridgePlugin: FlutterPlugin, MethodCallHandler {
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "link_bridge")
     channel.setMethodCallHandler(this)
-    ///注册所有channel
+    /// 注册所有channel
     val bridgeChannels = FlutterLinkChannelManager.getAllChannel()
     bridgeChannels.forEach { it.setup(flutterPluginBinding.binaryMessenger)}
   }

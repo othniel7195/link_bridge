@@ -1,4 +1,4 @@
-package com.jimmy.link_bridge
+package com.shuinfo.link_bridge
 
 //
 //  android
@@ -19,21 +19,32 @@ class FlutterChannelError(val errorCode: Int, val errorMessage: String, val deta
         functionCallInProgress(1000),
         argsInvalid(1001)
     }
+
     var userInfo = mutableMapOf<String, Any>()
 
     fun dictionaryRepresentation(): Map<String, Any> {
-        var dict = mutableMapOf<String, Any>("errorCode" to errorCode, "errorMessage" to errorMessage)
+        var dict =
+            mutableMapOf<String, Any>("errorCode" to errorCode, "errorMessage" to errorMessage)
         for (t in userInfo) {
             dict[t.key] = t.value
         }
-        return  dict
+        return dict
     }
 
     companion object {
         fun invalidParameter(error: Exception): FlutterChannelError {
-            return FlutterChannelError(errorCode = ErrorCode.argsInvalid.value, errorMessage = "Invalid Parameter. $error", detail = null)
+            return FlutterChannelError(
+                errorCode = ErrorCode.argsInvalid.value,
+                errorMessage = "Invalid Parameter. $error",
+                detail = null
+            )
         }
-        val functionCallInProgress = FlutterChannelError(errorCode = ErrorCode.functionCallInProgress.value, errorMessage = "Function call in progress, no reentrant allowed.", detail = null)
+
+        val functionCallInProgress = FlutterChannelError(
+            errorCode = ErrorCode.functionCallInProgress.value,
+            errorMessage = "Function call in progress, no reentrant allowed.",
+            detail = null
+        )
     }
 
 }
@@ -47,9 +58,9 @@ class FlutterBridge {
     }
 }
 
-class FlutterChannelCallback(var methodName: String, var result:  MethodChannel.Result) {
+class FlutterChannelCallback(var methodName: String, var result: MethodChannel.Result) {
 
-    private  var isInvalidated = false
+    private var isInvalidated = false
 
     fun resolve(response: Map<String, Any>?) {
         if (isInvalidated) {
@@ -58,7 +69,10 @@ class FlutterChannelCallback(var methodName: String, var result:  MethodChannel.
         isInvalidated = true
         if (response != null) {
             val resultString = response.toString()
-            Log.d("[Flutter Channel]", "FlutterChannelBridge $methodName resolve with result: $resultString")
+            Log.d(
+                "[Flutter Channel]",
+                "FlutterChannelBridge $methodName resolve with result: $resultString"
+            )
             result.success(resultString)
         } else {
             Log.d("[Flutter Channel]", "FlutterChannelBridge $methodName resolve with no result")
@@ -72,15 +86,17 @@ class FlutterChannelCallback(var methodName: String, var result:  MethodChannel.
         }
         isInvalidated = true
         val errorString = error.dictionaryRepresentation().toString()
-        Log.d("[Flutter Channel]", "FlutterChannelBridge $methodName reject with error: $errorString")
+        Log.d(
+            "[Flutter Channel]",
+            "FlutterChannelBridge $methodName reject with error: $errorString"
+        )
         result.error(error.errorCode.toString(), errorString, error.detail)
     }
 
 }
 
 
-
-class  KotlinFlutterBridgeHandler{
+class KotlinFlutterBridgeHandler {
     private var isInvalidated = false
     private var methodName = ""
 
@@ -101,14 +117,18 @@ class  KotlinFlutterBridgeHandler{
                 try {
                     val obj = JSONObject(arg)
                     handler(obj, callback)
-                } catch(e: JSONException){
+                } catch (e: JSONException) {
 
                     callback.reject(FlutterChannelError.invalidParameter(e))
                 }
             } else {
-                callback.reject(FlutterChannelError(FlutterChannelError.ErrorCode.argsInvalid.value,
-                    errorMessage = "Invalid Parameter. Params needed but not found.",
-                    detail = params))
+                callback.reject(
+                    FlutterChannelError(
+                        FlutterChannelError.ErrorCode.argsInvalid.value,
+                        errorMessage = "Invalid Parameter. Params needed but not found.",
+                        detail = params
+                    )
+                )
             }
         })
     }
@@ -128,7 +148,8 @@ private class KotlinFlutterBridgeDispatcher {
     companion object {
         val shared = KotlinFlutterBridgeDispatcher()
     }
-    private var handlerDict = mutableMapOf<String, (Any?, MethodChannel.Result) -> Unit> ()
+
+    private var handlerDict = mutableMapOf<String, (Any?, MethodChannel.Result) -> Unit>()
 
     init {
         FlutterBridge.handler = { methodName, argString, result ->
@@ -148,7 +169,7 @@ private class KotlinFlutterBridgeDispatcher {
     }
 }
 
-class FlutterEnviromentStreamHandler: EventChannel.StreamHandler {
+class FlutterEnviromentStreamHandler : EventChannel.StreamHandler {
     var streamEvent: EventChannel.EventSink? = null
     var beginListenCallback: (() -> Unit)? = null
 

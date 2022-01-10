@@ -1,4 +1,4 @@
-package com.jimmy.link_bridge
+package com.shuinfo.link_bridge
 
 //
 //  android
@@ -8,16 +8,15 @@ package com.jimmy.link_bridge
 //
 
 
-
-
 class FlutterLinkChannelManager {
     companion object {
         private var flutterLinkChannels = mutableListOf<FlutterChannelLink>()
         fun addChannel(channel: FlutterChannelLink) {
             flutterLinkChannels.add(channel)
         }
+
         fun getAllChannel(): List<FlutterChannelLink> {
-            return  flutterLinkChannels
+            return flutterLinkChannels
         }
     }
 }

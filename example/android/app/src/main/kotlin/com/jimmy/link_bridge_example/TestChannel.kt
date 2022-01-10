@@ -1,14 +1,12 @@
 package com.jimmy.link_bridge_example
 
 import android.app.Activity
-import android.os.Looper
-import com.jimmy.link_bridge.FlutterChannelLink
-import com.jimmy.link_bridge.FlutterEnviromentStreamHandler
-import com.jimmy.link_bridge.KotlinFlutterBridgeHandler
+import com.shuinfo.link_bridge.FlutterChannelLink
+import com.shuinfo.link_bridge.FlutterEnviromentStreamHandler
+import com.shuinfo.link_bridge.KotlinFlutterBridgeHandler
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
 import java.util.*
-import java.util.logging.Handler
 import kotlin.concurrent.schedule
 import kotlin.concurrent.timerTask
 

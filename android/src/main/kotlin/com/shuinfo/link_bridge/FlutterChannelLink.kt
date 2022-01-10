@@ -1,4 +1,4 @@
-package com.jimmy.link_bridge
+package com.shuinfo.link_bridge
 
 import android.util.Log
 import io.flutter.plugin.common.BinaryMessenger
@@ -32,7 +32,10 @@ interface FlutterChannelLink {
             methodChannel = MethodChannel(binaryMessenger, methodChannelName)
             registerMethodHandlers()
             methodChannel?.setMethodCallHandler { call, result ->
-                Log.d("[Flutter Channel]", "Channel: \\(methodChannelName) method: ${call.method} and arguments: ${call.arguments}")
+                Log.d(
+                    "[Flutter Channel]",
+                    "Channel: \\(methodChannelName) method: ${call.method} and arguments: ${call.arguments}"
+                )
                 callHandlers(call, result)
             }
         }
@@ -40,7 +43,7 @@ interface FlutterChannelLink {
         val eventChannelName = eventChannelName
         if (eventChannelName != null) {
             streamHandler = FlutterEnviromentStreamHandler()
-            if(streamHandler != null) {
+            if (streamHandler != null) {
                 eventChannel = EventChannel(binaryMessenger, eventChannelName)
                 eventChannel?.setStreamHandler(streamHandler)
                 registerStreamHandlers()
@@ -50,6 +53,7 @@ interface FlutterChannelLink {
         }
 
     }
+
     fun clearData() {}
     fun channelWillUnregister() {
         handlers.forEach { it.invalidate() }
