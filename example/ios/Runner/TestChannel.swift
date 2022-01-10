@@ -47,6 +47,13 @@ class FlutterLinkTest: FlutterChannelLink {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             self.methodChannel?.invokeMethod("link_action_3", arguments: ["link_action_3": "link_action_3 notify ok"])
+        }
+        
+        
+    }
+    
+    func registerStreamHandlers() {
+         DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             if #available(iOS 10.0, *) {
                 self.timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { _ in
                     self.streamHandler?.streamEvent?(["event": "yuyuiio"])
@@ -54,14 +61,7 @@ class FlutterLinkTest: FlutterChannelLink {
             } else {
                 // Fallback on earlier versions
             }
-            
         }
-        
-        
-    }
-    
-    func registerStreamHandlers() {
-        
     }
 }
 

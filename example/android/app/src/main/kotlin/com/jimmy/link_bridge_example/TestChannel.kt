@@ -50,7 +50,12 @@ class TestChannel(val activity: Activity): FlutterChannelLink {
             activity.runOnUiThread {
                 methodChannel?.invokeMethod("link_action_3", mapOf("link_action_3" to "link_action_3 notify ok"))
             }
+        }
 
+    }
+
+    override fun registerStreamHandlers() {
+        Timer().schedule(10000) {
             t.schedule(timerTask {
                 activity.runOnUiThread {
                     streamHandler?.streamEvent?.success(mapOf("event" to "yuyuiio"))
@@ -58,9 +63,5 @@ class TestChannel(val activity: Activity): FlutterChannelLink {
 
             }, Date(), 2000)
         }
-
-    }
-
-    override fun registerStreamHandlers() {
     }
 }
