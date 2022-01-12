@@ -1,4 +1,4 @@
-group 'com.jimmy.link_bridge'
+group 'com.shuinfo.link_bridge'
 version '1.0-SNAPSHOT'
 
 buildscript {
