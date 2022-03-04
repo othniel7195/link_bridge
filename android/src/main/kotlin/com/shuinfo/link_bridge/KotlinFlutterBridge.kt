@@ -8,6 +8,7 @@ package com.shuinfo.link_bridge
 //
 
 import android.util.Log
+import com.google.gson.Gson
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
 import org.json.JSONException
@@ -68,7 +69,7 @@ class FlutterChannelCallback(var methodName: String, var result: MethodChannel.R
         }
         isInvalidated = true
         if (response != null) {
-            val resultString = response.toString()
+            var resultString = Gson().toJson(response)
             Log.d(
                 "[Flutter Channel]",
                 "FlutterChannelBridge $methodName resolve with result: $resultString"
