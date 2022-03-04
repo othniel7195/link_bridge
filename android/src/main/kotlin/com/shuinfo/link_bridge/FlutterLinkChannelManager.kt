@@ -18,5 +18,9 @@ class FlutterLinkChannelManager {
         fun getAllChannel(): List<FlutterChannelLink> {
             return flutterLinkChannels
         }
+
+        fun  clear(){
+            flutterLinkChannels.clear()
+        }
     }
 }
