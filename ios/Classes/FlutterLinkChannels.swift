@@ -18,4 +18,8 @@ public class FlutterLinkChannelManger {
     public static func getAllChannel() -> [FlutterChannelLink.Type] {
         return flutterLinkChannels
     }
+    
+    public static func clearAllChannel() {
+        flutterLinkChannels.removeAll()
+    }
 }
